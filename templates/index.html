@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="syn-premium-landing" aria-labelledby="syn-landing-title">
+  <div class="syn-premium-noise" aria-hidden="true"></div>
+  <div class="syn-premium-copy">
+    <div class="syn-premium-pill"><span class="syn-live-dot"></span> THE SMARTER CAMPUS FOOD EXPERIENCE</div>
+    <div class="syn-landing-brand" aria-label="SYNBYTE, Powered by Synthexia Group">
+      <div class="syn-landing-wordmark">SYN<span>BYTE</span><span class="syn-brand-period">.</span></div>
+      <div class="syn-landing-powered">POWERED BY <strong>SYNTHEXIA GROUP</strong></div>
+    </div>
+    <h1 id="syn-landing-title">Crave it.<br><span>Click it.</span><br>Collect it.</h1>
+    <p class="syn-premium-lead">Your next campus favourite is only a few clicks away. Pre-order, track preparation and collect with your secure pickup token.</p>
+    <div class="syn-premium-buttons">
+      <a class="button syn-premium-primary" href="{{url_for('student_login')}}">I'm a student / customer <span aria-hidden="true">↗</span></a>
+      <a class="button syn-premium-outline" href="{{url_for('vendor_login')}}">I'm a food vendor <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="syn-premium-steps" aria-label="Platform highlights">
+      <span><i>01</i> Order your food</span>
+      <span><i>02</i> Get notified</span>
+      <span><i>03</i> Pick up fresh</span>
+    </div>
+  </div>
+  <div class="syn-premium-showcase">
+    <div class="syn-halo syn-halo-one" aria-hidden="true"></div>
+    <div class="syn-halo syn-halo-two" aria-hidden="true"></div>
+    <div class="syn-emblem-3d" data-tilt-emblem>
+      <img src="{{url_for('static',filename='images/branding/synthexia-group-emblem.webp')}}" alt="Synthexia Group silver infinity emblem featuring @synthexia_lab and synthexia_group" width="1100" height="1100">
+    </div>
+    <div class="syn-emblem-plate">SYNTHEXIA GROUP <span>·</span> CREATIVE TECHNOLOGY COLLECTIVE</div>
+  </div>
+</section>
+<div class="syn-public-caption">Independent student prototype · Demo/test payments unless a verified payment gateway is configured · Not an official LPU service</div>
+{% endblock %}

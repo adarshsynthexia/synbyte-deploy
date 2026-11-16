@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE · EXPLORE</div><h1>{{selected_vendor_name if selected_vendor else 'Choose what to eat.'}}</h1><p class="muted">Pick one stall, browse its independently managed dishes and enjoy quick pickup.</p></div>
+<div class="section-title"><a href="{{url_for('vendor_directory')}}" class="button soft small">← Choose another vendor</a></div>
+<form method="get" action="{{url_for('food_menu')}}" class="filters"><input name="q" placeholder="Search dishes, categories..." value="{{q}}"><select name="category"><option value="">All categories</option>{% for c in categories %}<option value="{{c}}" {% if selected_category==c %}selected{% endif %}>{{c}}</option>{% endfor %}</select><select name="vendor" required><option value="">Choose a stall</option>{% for v in vendors %}<option value="{{v['id']}}" {% if selected_vendor==v['id']|string %}selected{% endif %}>{{v['name']}}</option>{% endfor %}</select><button class="button">Find dishes →</button></form>
+<div class="section-title"><h2>{{foods|length}} dishes</h2><span class="small muted">One vendor per checkout</span></div>
+{% from '_food-card.html' import card with context %}<div class="foods">{% for food in foods %}{{card(food,csrf,food['id'] in favorites)}}{% else %}<div class="card muted">No matching dishes. Try another vendor or category.</div>{% endfor %}</div>
+<div class="notice section">Food images are sourced from independent third-party photographs; photo verification details are listed in the project README. Vendors can replace images with their own permitted photos.</div>
+{% endblock %}

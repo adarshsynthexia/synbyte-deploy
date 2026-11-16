@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#d50c2f"><meta name="description" content="SYNBYTE · Powered by Synthexia Group · Crave It. Click It. Collect It."><title>{{ title|default('Campus food ordering') }} · SYNBYTE</title><link rel="stylesheet" href="{{ url_for('static',filename='css/app.css') }}"></head>
+<body data-authenticated="{{ 'true' if user else 'false' }}">
+<header class="site-header"><div class="header-inner">
+{% if user %}<button class="menu-toggle" id="mobileMenu" aria-expanded="false" aria-label="Open navigation">☰</button>{% endif %}
+<a class="brand syn-header-brand" href="{{ url_for('home') }}" aria-label="SYNBYTE · Powered by Synthexia Group"><span class="brand-mark syn-header-icon">♨</span><span class="brand-name"><b>SYNBYTE<span class="syn-brand-period">.</span></b><small>POWERED BY <strong>SYNTHEXIA GROUP</strong></small><span class="brand-tag">Crave It. Click It. Collect It.</span></span></a>
+<span class="location">📍 LPU Campus Food Court</span><nav class="header-nav" aria-label="Top navigation">
+{% if user %}<span class="desktop-only" style="font-size:12px">Hi, {{ user['name'].split()[0] | e }}</span>
+{% if user['role']=='student' %}<a class="button soft small" href="{{ url_for('cart') }}">🛒 Cart</a>{% endif %}
+<a class="button soft small" href="{{ url_for('vendor_notifications') if user['role']=='vendor' else url_for('notifications') if user['role']=='student' else url_for('admin_dashboard') }}" aria-label="Notifications">🔔 <span data-notification-count></span></a>
+<form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="_csrf" value="{{csrf}}"><button class="button ghost small" type="submit">Log out</button></form>
+{% else %}{% if request.path != "/" %}<a class="button soft small" href="{{ url_for('role_selection') }}">Choose login</a>{% endif %}{% endif %}
+</nav></div></header>
+{% set is_app = user and user['role'] in ['student','vendor','admin'] %}
+{% if is_app %}<div class="shell"><aside class="sidebar" id="sidebar" aria-label="{{ user['role'] }} navigation">
+{% if user['role']=='student' %}
+<a href="{{url_for('student_dashboard')}}">⌂ &nbsp; Dashboard</a><a href="{{url_for('vendor_directory')}}">◫ &nbsp; Food stalls</a><a href="{{url_for('cart')}}">🛒 &nbsp; My cart</a><a href="{{url_for('my_orders')}}">▤ &nbsp; My orders</a><a href="{{url_for('favorites')}}">♡ &nbsp; Favorites</a><a href="{{url_for('notifications')}}">♧ &nbsp; Notifications</a><a href="{{url_for('student_profile')}}">♙ &nbsp; Profile</a>
+{% elif user['role']=='vendor' %}
+<a href="{{url_for('vendor_dashboard')}}">⌂ &nbsp; Overview</a><a href="{{url_for('vendor_orders')}}">▤ &nbsp; Incoming orders</a><a href="{{url_for('vendor_kitchen')}}">♨ &nbsp; Kitchen board</a><a href="{{url_for('vendor_verify_token')}}">⌗ &nbsp; Collect token</a><a href="{{url_for('vendor_menu')}}">◫ &nbsp; My menu</a><a href="{{url_for('vendor_history')}}">▤ &nbsp; History</a><a href="{{url_for('vendor_notifications')}}">♧ &nbsp; Notifications</a><a href="{{url_for('vendor_profile')}}">♙ &nbsp; My stall</a>
+{% else %}<a href="{{url_for('admin_dashboard')}}">⌂ &nbsp; Admin overview</a><a href="{{url_for('admin_vendors')}}">◇ &nbsp; Vendors</a><a href="{{url_for('admin_orders')}}">▤ &nbsp; All orders</a>{% endif %}
+<a href="{{url_for('help_support')}}">ⓘ &nbsp; Help &amp; support</a><div class="sidebar-footer"><strong>SYNBYTE</strong><div>Smart campus dining.</div><div>Independent educational prototype</div></div></aside><main class="content"><div class="content-inner">
+{% else %}<main class="public-wrap">{% endif %}
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="alerts" role="status">{% for kind,message in messages %}<div class="alert {{kind}}">{{message}}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+{% if is_app %}</div></main></div>{% else %}</main>{% endif %}
+{% if request.path != "/" %}<footer class="footer">© {{current_year}} SYNBYTE · Powered by Synthexia Group · Independent student project · <a href="{{url_for('help_support')}}">Help</a> · <a href="{{url_for('photo_credits')}}">Image credits</a> · <strong>Demo menu and prices; not official LPU stall listings</strong></footer>{% endif %}<script src="{{url_for('static',filename='js/app.js')}}" defer></script>{% block scripts %}{% endblock %}</body></html>

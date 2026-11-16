@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Vendor applications</h1><p class="muted">Review and approve stalls before they receive consumer orders.</p></div><div class="table-wrap"><table class="table"><thead><tr><th>Vendor</th><th>Email</th><th>Phone</th><th>Approval</th></tr></thead><tbody>{% for v in vendors %}<tr><td><strong>{{v['name']}}</strong></td><td>{{v['contact_email'] or '—'}}</td><td>{{v['contact'] or '—'}}</td><td>{% if v['approved'] %}<span class="tag ok">Approved</span>{% else %}<form method="post" action="{{url_for('admin_approve_vendor',vid=v['id'])}}"><input type="hidden" name="_csrf" value="{{csrf}}"><button class="button small">Approve</button></form>{% endif %}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

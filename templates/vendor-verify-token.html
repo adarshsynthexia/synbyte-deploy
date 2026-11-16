@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Verify pickup token</h1><p class="muted">Only Ready orders can be collected; tokens work once.</p></div><div class="card" style="max-width:600px"><div class="eyebrow">Collection desk</div><h2>Enter student's pickup token</h2><p class="muted">Check the token shown by the student. An invalid or previously used token is rejected.</p><form method="post" action="{{url_for('vendor_verify_token_post')}}"><input type="hidden" name="_csrf" value="{{csrf}}"><div class="field"><label for="token">Pickup token</label><input id="token" name="token" required placeholder="CX-..." autocomplete="off"></div><button class="button block">Verify &amp; mark Collected →</button></form></div>
+{% endblock %}

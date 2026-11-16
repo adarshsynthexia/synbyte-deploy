@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Completed orders</h1><p class="muted">Successfully collected orders for your food stall.</p></div>{% for o in orders %}<div class="order-card"><strong>Order #{{o['id']}} · {{o['consumer_name']}}</strong><div class="tag ok">Collected</div><p class="muted">{{money(o['total'])}}</p><a class="red" href="{{url_for('vendor_order_details',oid=o['id'])}}">Review order →</a></div>{% else %}<div class="card muted">No completed collections yet.</div>{% endfor %}
+{% endblock %}

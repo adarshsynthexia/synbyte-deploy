@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="syn-auth-layout" aria-labelledby="login-title">
+  {% with role_label='FOOD VENDOR', panel_line='Your kitchen. In control.', panel_description='Manage paid orders, update your menu, and notify students when food is ready.' %}{% include '_premium-auth-art.html' %}{% endwith %}
+  <div class="syn-auth-right"><div class="syn-auth-form-shell">
+    <div class="syn-auth-topline"><span class="syn-dot-small"></span> SECURE FOOD VENDOR LOGIN</div>
+    <h2 id="login-title">Vendor sign in <span class="syn-hand-wave" aria-hidden="true">✦</span></h2>
+    <p class="syn-auth-help">A dedicated workspace for your food stall.</p>
+    <form method="post" action="{{url_for('do_login',kind='vendor')}}" class="syn-login-form">
+      <input type="hidden" name="_csrf" value="{{csrf}}">
+      <div class="field"><label for="email">Vendor email</label><input id="email" name="email" type="email" placeholder="manager@example.com" autocomplete="username" required></div>
+      <div class="field"><div class="syn-field-row"><label for="password">Password</label></div><div class="syn-password-wrap"><input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required minlength="10"><button type="button" class="syn-eye" data-password-toggle="password" aria-label="Show password">Show</button></div></div>
+      <button type="submit" class="button syn-login-submit">Open vendor workspace <span aria-hidden="true">→</span></button>
+    </form>
+    <div class="syn-auth-links"><span>New stall? <a href="{{url_for('vendor_register')}}">Create vendor account</a></span><span><a href="{{url_for('forgot_password')}}">Forgot password?</a> · <a href="{{url_for('role_selection')}}">Switch role</a></span></div>
+    <div class="syn-auth-security"><span aria-hidden="true">◈</span> Secure, role-based access. Payment demo only unless configured.</div>
+  </div></div>
+</section>
+{% endblock %}

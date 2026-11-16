@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-head"><span class="eyebrow">WELCOME TO YOUR FOOD COURT</span><h1>Choose your food stall.</h1><p class="muted">Every stall has its own menu, prices and kitchen. Select one vendor to start ordering.</p></section>
+<div class="vendor-grid">
+{% for stall in vendors %}
+<a href="{{url_for('vendor_food_menu',vendor_id=stall['id'])}}" class="vendor-tile">
+ <span class="vendor-avatar">{{stall['name'][:1]|upper}}</span><div><h2>{{stall['name']}}</h2><p>{{stall['dish_count']}} available dishes · {% if stall['starting_price'] %}From {{money(stall['starting_price'])}}{% else %}Coming soon{% endif %}</p></div><span class="vendor-arrow">Explore →</span>
+</a>
+{% else %}<div class="card">No active stalls yet.</div>{% endfor %}
+</div>
+<p class="notice">Demo campus vendors are examples, not official LPU partnerships. A new vendor appears here immediately after registering.</p>
+{% endblock %}

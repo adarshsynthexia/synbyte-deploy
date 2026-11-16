@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>All platform orders</h1><p class="muted">Administrative overview; totals from server-side records.</p></div><div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>Customer</th><th>Vendor</th><th>Amount</th><th>Payment</th><th>Status</th></tr></thead><tbody>{% for o in orders %}<tr><td>#{{o['id']}}</td><td>{{o['consumer_name']}}</td><td>{{o['vendor_name']}}</td><td>{{money(o['total'])}}</td><td>{{o['payment_state']}}</td><td>{{o['status']}}</td></tr>{% else %}<tr><td colspan="6">No orders yet.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

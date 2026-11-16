@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Your pickup token</h1><p class="muted">Show this to the correct vendor when your food is marked Ready.</p></div><div class="card" style="max-width:760px;text-align:center"><div class="eyebrow">Order #{{order['id']}} · {{order['vendor_name']}}</div><div class="token-code">{{order['token']}}</div>{% if qr %}<div class="qr" style="margin:15px auto"><img src="{{qr}}" alt="QR pickup token"></div>{% endif %}<p class="muted">Keep your token private. It will become invalid after successful collection.</p><div class="tag ok">Payment verified: {{order['payment_state']}}</div><p style="margin-top:20px"><a class="button" href="{{url_for('order_tracking',oid=order['id'])}}">Track my food →</a></p></div>
+{% endblock %}

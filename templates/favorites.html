@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Your favorites</h1><p class="muted">Saved dishes, ready whenever your cravings hit.</p></div>{% from '_food-card.html' import card with context %}<div class="foods">{% for food in foods %}{{card(food,csrf,True)}}{% else %}<div class="card muted">No favorites saved yet. <a href="{{url_for('food_menu')}}">Browse menu →</a></div>{% endfor %}</div>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Your stall</h1><p class="muted">Vendor information and approval status.</p></div><div class="card" style="max-width:700px"><div class="eyebrow">Vendor account</div><h2>{{vendor['name']}}</h2><div class="line-item"><span>Vendor contact</span><strong>{{vendor['contact'] or 'Not provided'}}</strong></div><div class="line-item"><span>Account email</span><strong>{{user['email']}}</strong></div><div class="line-item"><span>Approval status</span><span class="tag ok">{{'Approved' if vendor['approved'] else 'Pending'}}</span></div><a class="button" href="{{url_for('vendor_menu')}}">Manage dishes →</a></div>
+{% endblock %}

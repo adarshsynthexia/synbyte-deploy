@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head"><div class="eyebrow">SYNBYTE</div><h1>Your profile</h1><p class="muted">Update the name shown on your orders.</p></div><div class="card" style="max-width:650px"><form method="post" action="{{url_for('student_profile')}}"><input type="hidden" name="_csrf" value="{{csrf}}"><div class="field"><label for="name">Full name</label><input name="name" id="name" value="{{user['name']}}" required></div><div class="field"><label>Email address</label><input value="{{user['email']}}" disabled></div><button class="button">Save changes</button></form></div>
+{% endblock %}
